@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway-finance
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/auth/**
+        - id: expense-service
+          uri: lb://EXPENSE-SERVICE
+          predicates:
+            - Path=/api/expenses/**
+        - id: budget-service
+          uri: lb://BUDGET-SERVICE
+          predicates:
+            - Path=/api/budgets/**
